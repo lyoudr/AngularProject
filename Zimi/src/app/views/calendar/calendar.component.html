@@ -1,0 +1,70 @@
+<div class="animated fadeIn">
+  <div class="col-lg-10">
+    <div class="card">
+      <div class="card-header d-flex flex-row">
+        <div class="mr-sm-3 arrow">
+          <i (click)="Prev()" class="fa fa-chevron-left"></i>
+        </div>
+        <div class="mr-sm-2">
+          <h5>{{Year}}</h5>
+        </div>
+        <div class="mr-sm-3">
+          <h5>{{Month}}</h5>
+        </div>
+        <div class="arrow">
+          <i (click)="Next()" class="fa fa-chevron-right"></i>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <th style="width: 14.2%">Sun</th>
+              <th style="width: 14.2%">Mon</th>
+              <th style="width: 14.2%">Tue</th>
+              <th style="width: 14.2%">Wed</th>
+              <th style="width: 14.2%">Thu</th>
+              <th style="width: 14.2%">Fri</th>
+              <th style="width: 14.2%">Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
+                <th (dblclick)="OpenModal(date, $event)" *ngIf="i < 7">{{date}}
+                  <li>
+                  </li>
+                </th>
+              </ng-template>
+            </tr>
+            <tr>
+              <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
+                <th (dblclick)="OpenModal(date)" *ngIf="6 < i && i < 14">{{date}}</th>
+              </ng-template>
+            </tr>
+            <tr>
+              <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
+                <th (dblclick)="OpenModal(date)" *ngIf="13 < i && i < 21">{{date}}</th>
+              </ng-template>
+            </tr>
+            <tr>
+              <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
+                <th (dblclick)="OpenModal(date)" *ngIf="20 < i && i < 28">{{date}}</th>
+              </ng-template>
+            </tr>
+            <tr>
+              <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
+                <th (dblclick)="OpenModal(date)" *ngIf="27 < i && i < 35">{{date}}</th>
+              </ng-template>
+            </tr>
+            <tr>
+              <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
+                <th (dblclick)="OpenModal(date)" *ngIf="34 < i && i < 42">{{date}}</th>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

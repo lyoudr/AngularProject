@@ -1,0 +1,11 @@
+
+<div mat-dialog-content>
+  <p>待辦事項</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.todoitem">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">取消</button>
+  <button mat-button [mat-dialog-close]="data.todoitem" cdkFocusInitial>新增</button>
+</div>

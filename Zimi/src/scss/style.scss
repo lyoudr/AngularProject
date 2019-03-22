@@ -1,0 +1,14 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+//calendar css
+@import "../../node_modules/angular-calendar/css/angular-calendar.css";
+
+//Material themes
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';

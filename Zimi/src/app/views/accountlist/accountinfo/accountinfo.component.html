@@ -1,0 +1,129 @@
+<div class="animated fadeIn">
+  <!--基本資料-->
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xs-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 基本資料
+        </div>
+        <div class="card-body">
+          <table *ngIf="eachaccount" class="table">
+            <thead>
+            <tr>
+              <th>UserID</th>
+              <th>1234-4321-ABCD-DCBA</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>狀態</td>
+              <td>{{eachaccount.status}}</td>                    
+            </tr>
+            <tr>
+              <td>註冊日期</td>
+              <td>{{eachaccount.createTime}}</td>                   
+            </tr>
+            <tr>
+              <td>提交認證日期</td>
+              <td>{{eachaccount.createdTime}}</td>
+            </tr>
+            <tr>
+              <td>姓名</td>
+              <td>{{eachaccount.name}}</td>
+            </tr>
+            <tr>
+              <td>手機號碼</td>
+              <td>{{eachaccount.account}}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{eachaccount.email}}</td>
+            </tr>
+            <tr>
+              <td>生日</td>
+              <td>{{eachaccount.birthday}}</td>
+            </tr>
+            <tr>
+              <td>實名認證狀態</td>
+              <td>{{eachaccount.auditStatus}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <!--錢包帳戶-->
+  <div class ="row justify-content-center">
+    <div class="col-lg-8 col-xs-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 錢包帳戶
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let coin of coins">
+                <th>{{coin.sName}}</th>
+                <th>{{coin.balance}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--附件-->
+  <div class = "row justify-content-center">
+    <div class="col-lg-8 col-xs-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i><strong>附件</strong>
+          </div>
+          <div class="card-body">
+            <div class = "d-flex flex-column flex-lg-row">              
+                <img class = "img-responsive  w-50 h-50" src= "assets/img/avatars/1.jpg" />              
+                <img class = "img-responsive  w-50 h-50 mt-lg-0 mt-xs-2 ml-xs-0 ml-lg-2 " src= "assets/img/avatars/2.jpg" />
+            </div>
+          </div>
+          <div class="card-body border border-light col-11 ml-auto mr-auto">
+              <div class = "d-flex flex-column flex-lg-row"> 
+                    停用原因    
+              </div>
+          </div>
+          <div class="row justify-content-center mt-3 mb-3">
+            <span class="badge badge-primary">停用帳號</span>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!--停用紀錄-->
+  <div class = "row justify-content-center">
+    <div class="col-lg-8 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+              <i class="fa fa-align-justify"></i> 停用紀錄
+            </div>
+            <div class="card-body">
+              <table *ngIf="deactive" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>停用時間</th>
+                    <th>停用原因</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2019.01.01</td>
+                    <td>帳號有問題</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row justify-content-center">
+                  <span class="badge badge-primary">解除停用</span>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

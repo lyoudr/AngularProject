@@ -1,0 +1,78 @@
+<div class="animated fadeIn">
+  <div class ="row">   
+      <div class = 'col-sm-12 col-md-4'>店家列表</div>
+      <div class ="col-sm-12 col-md-8">
+          <div class ="input-group">
+              <div class ="input-group-btn search-panel">
+                  <button (click)="delete(searchBox)" type="button" class ="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      <span id="search_concept">清除搜尋</span> 
+                  </button>
+              </div>
+              <input type="hidden" name="search_param" value="all" id="search_param"/>         
+              <input type="text" class ="form-control" name="x" style="text-align:center" 
+                #searchBox id="search-box" (keyup.enter)="search(searchBox.value)"  
+                placeholder="店家名稱/統編"/>
+              <span class ="input-group-btn">
+                  <button class ="btn btn-default" type="button"><span class ="glyphicon glyphicon-search"></span></button>
+              </span>
+          </div>
+      </div>
+  </div>
+  <div class="row justify-content-">
+    <div class="col-12 mt-3 mb-3">
+      <div class="float-right">
+        <a routerLink = "/storemanage/addstore">
+        <button type="button" class="btn btn-block btn-secondary active float-right" aria-pressed="true">新增店家</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th>店家名稱</th>
+                <th>統一編號</th>
+                <th>負責人</th>
+                <th>聯絡人</th>
+                <th>授權狀態</th>
+                <th>出金狀態</th>
+                <th>店家資料</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let storeinfo of storeinformation">
+                <td>{{storeinfo.name}}</td>
+                <td>{{storeinfo.taxId}}</td>
+                <td>{{storeinfo.chargename}}</td>
+                <td>{{storeinfo.contactperson}}</td>
+                <td>{{storeinfo.chargestatus}}</td>
+                <td>{{storeinfo.moneystatus}}</td>
+                <td>
+                    <a routerLink = "detail/{{storeinfo.storeCid}}">
+                      <span class="badge badge-success">店家資料</span>
+                    </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination">
+              <li (click)="decrease()" class="page-item"><a class="page-link">Prev</a></li>
+              <li (click)="Getstore(1)" class="page-item active"><a class="page-link">1</a></li>
+              <li (click)="Getstore(2)" class="page-item"><a class="page-link">2</a></li>
+              <li (click)="Getstore(3)" class="page-item"><a class="page-link">3</a></li>
+              <li (click)="increase()" class="page-item"><a class="page-link">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>
