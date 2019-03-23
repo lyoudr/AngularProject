@@ -10,17 +10,16 @@ import { CastExpr } from '@angular/compiler';
 })
 
 export class CalendarComponent implements OnInit {
+  /* Variables */
   Year: any;
   Month:string;
   datespermonth: number ;
-  datesarray : any = [];
+  datesarray : any = [{ date:'', data: [] }];
   initialmonth : any;
   currentmonth: any;
   substractyear: number = 0;
-  parenttodolists: [];
+  parenttodolists: any = [{}];
   weekday: any;
-  firstweekday: any;
-  secondweekday: any;
 
   constructor(public dialog: MatDialog) { }
   
@@ -67,15 +66,15 @@ export class CalendarComponent implements OnInit {
     /*設定目前時間*/
     currenttime.setMonth(this.initialmonth);
     currenttime.setDate(1);
-    currenttime.getDay();
     for(var j = 0; j < (currenttime.getDay()); j++){
-      this.datesarray[`${j}`] = '';
+      let eachtimeresult = { date: '', data: [] }
+      this.datesarray.push(eachtimeresult);
     }
     for (var i = 1; i < this.datespermonth; i ++){
       var current = new Date();
       current.setDate(i);
       current.getDay();
-      this.datesarray.push(current.getDate());             
+      this.datesarray.push({date: current.getDate(), data: [] });             
     }
   }
 
@@ -168,38 +167,27 @@ export class CalendarComponent implements OnInit {
     currenttime.setFullYear(this.Year);
     currenttime.setMonth(this.initialmonth);
     currenttime.setDate(1);
-    currenttime.getDay();
     for(var j = 0; j < (currenttime.getDay()); j++){
-      this.datesarray[`${j}`] = '';
+      let eachtimeresult = { date: '', data: [] }
+      this.datesarray.push(eachtimeresult);
     }
     for (var i = 1; i < this.datespermonth; i ++){
       currenttime.setDate(i);
       currenttime.getDay();
-      this.datesarray.push(currenttime.getDate());             
+      this.datesarray.push({date: currenttime.getDate(), data: []});             
     }
   }
 
   /* 增加記事 */
-  OpenModal(date:any, event):void{
+  OpenModal(date:any):void{
     console.log('被點的日期是 =>', date);
-    //console.log('event is =>',event.target.childNodes[1].childNodes[0]);
-    var currenttime = new Date();
+    let currenttime = new Date();
     currenttime.setFullYear(this.Year);
     currenttime.setMonth(this.initialmonth);
-    currenttime.setDate(date);
-    let weekday = currenttime.getDay();
-    console.log('星期幾? =>', weekday);
+    currenttime.setDate(1);
+    let dateindex = (currenttime.getDay() + date);
+    console.log('dateindex is =>', dateindex);
     
-    switch (true) {
-      case (weekday < 7) :
-        this.firstweekday == weekday;
-        break;
-      case (weekday > 6 && weekday < 14) :
-        this.secondweekday == (weekday + 7);
-        break;
-    }
-    
-
     const dialogRef = this.dialog.open(TodoItem, {
       width: '300px',
       data: {todolists: this.parenttodolists}
@@ -207,7 +195,7 @@ export class CalendarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`The dialog was closed. Dialog result is =>${result}`);
-      this.parenttodolists = result;
+      this.datesarray[(dateindex-1)] = { date: date, data: result };
     });
   }
 }

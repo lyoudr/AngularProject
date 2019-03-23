@@ -31,10 +31,10 @@
           <tbody>
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
-                <th (dblclick)="OpenModal(date, $event)" *ngIf="i < 7">{{date}}
-                  <ul *ngIf = "i == firstweekday">
-                    <li style="list-style-type: none" *ngFor = "let item of parenttodolists">
-                      {{item}}
+                <th (dblclick)="OpenModal(date.date)" *ngIf="i < 7">{{date.date}}
+                  <ul>
+                    <li style="list-style-type: none">
+                      {{date.data}}
                     </li>
                   </ul>
                 </th>
@@ -42,10 +42,10 @@
             </tr>
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
-                <th (dblclick)="OpenModal(date)" *ngIf="6 < i && i < 14">{{date}}
-                  <ul *ngIf = "i == secondweekday">
-                    <li style="list-style-type: none" *ngFor = "let item of parenttodolists">
-                      {{item}}
+                <th (dblclick)="OpenModal(date.date)" *ngIf="6 < i && i < 14">{{date.date}}
+                  <ul>
+                    <li style="list-style-type: none">
+                      {{date.data}}
                     </li>
                   </ul>
                 </th>
@@ -53,22 +53,46 @@
             </tr>
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
-                <th (dblclick)="OpenModal(date)" *ngIf="13 < i && i < 21">{{date}}</th>
+                <th (dblclick)="OpenModal(date.date)" *ngIf="13 < i && i < 21">{{date.date}}
+                  <ul>
+                    <li *ngIf="date.data" style="list-style-type: none" >
+                      {{date.data}}
+                    </li>
+                  </ul>
+                </th>
               </ng-template>
             </tr>
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
-                <th (dblclick)="OpenModal(date)" *ngIf="20 < i && i < 28">{{date}}</th>
+                <th (dblclick)="OpenModal(date.date)" *ngIf="20 < i && i < 28">{{date.date}}
+                  <ul>
+                    <li *ngIf="date.data" style="list-style-type: none">
+                      {{date.data}}
+                    </li>
+                  </ul>
+                </th>
               </ng-template>
             </tr>
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
-                <th (dblclick)="OpenModal(date)" *ngIf="27 < i && i < 35">{{date}}</th>
+                <th (dblclick)="OpenModal(date.date)" *ngIf="27 < i && i < 35">{{date.date}}
+                  <ul>
+                    <li *ngIf="date.data" style="list-style-type: none">
+                      {{date.data}}
+                    </li>
+                  </ul>
+                </th>
               </ng-template>
             </tr>
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
-                <th (dblclick)="OpenModal(date)" *ngIf="34 < i && i < 42">{{date}}</th>
+                <th (dblclick)="OpenModal(date.date)" *ngIf="34 < i && i < 42">{{date.date}}
+                  <ul>
+                    <li *ngIf="date.data" style="list-style-type: none">
+                      {{date.data}}
+                    </li>
+                  </ul>
+                </th>
               </ng-template>
             </tr>
           </tbody>
