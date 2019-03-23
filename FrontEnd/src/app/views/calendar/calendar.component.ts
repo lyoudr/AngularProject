@@ -14,7 +14,7 @@ export class CalendarComponent implements OnInit {
   Year: any;
   Month:string;
   datespermonth: number ;
-  datesarray : any = [{ date:'', data: [] }];
+  datesarray : any = [];
   initialmonth : any;
   currentmonth: any;
   substractyear: number = 0;
