@@ -32,14 +32,23 @@
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
                 <th (dblclick)="OpenModal(date, $event)" *ngIf="i < 7">{{date}}
-                  <li>
-                  </li>
+                  <ul *ngIf = "i == firstweekday">
+                    <li style="list-style-type: none" *ngFor = "let item of parenttodolists">
+                      {{item}}
+                    </li>
+                  </ul>
                 </th>
               </ng-template>
             </tr>
             <tr>
               <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
-                <th (dblclick)="OpenModal(date)" *ngIf="6 < i && i < 14">{{date}}</th>
+                <th (dblclick)="OpenModal(date)" *ngIf="6 < i && i < 14">{{date}}
+                  <ul *ngIf = "i == secondweekday">
+                    <li style="list-style-type: none" *ngFor = "let item of parenttodolists">
+                      {{item}}
+                    </li>
+                  </ul>
+                </th>
               </ng-template>
             </tr>
             <tr>

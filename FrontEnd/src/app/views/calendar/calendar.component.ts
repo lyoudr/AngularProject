@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { CastExpr } from '@angular/compiler';
   
 /* CalendarComponent */
 @Component({
@@ -16,7 +17,10 @@ export class CalendarComponent implements OnInit {
   initialmonth : any;
   currentmonth: any;
   substractyear: number = 0;
-  todoitem: string;
+  parenttodolists: [];
+  weekday: any;
+  firstweekday: any;
+  secondweekday: any;
 
   constructor(public dialog: MatDialog) { }
   
@@ -178,16 +182,32 @@ export class CalendarComponent implements OnInit {
   /* 增加記事 */
   OpenModal(date:any, event):void{
     console.log('被點的日期是 =>', date);
-    console.log('event is =>',event.target.childNodes[1].childNodes[0]);
+    //console.log('event is =>',event.target.childNodes[1].childNodes[0]);
+    var currenttime = new Date();
+    currenttime.setFullYear(this.Year);
+    currenttime.setMonth(this.initialmonth);
+    currenttime.setDate(date);
+    let weekday = currenttime.getDay();
+    console.log('星期幾? =>', weekday);
+    
+    switch (true) {
+      case (weekday < 7) :
+        this.firstweekday == weekday;
+        break;
+      case (weekday > 6 && weekday < 14) :
+        this.secondweekday == (weekday + 7);
+        break;
+    }
+    
+
     const dialogRef = this.dialog.open(TodoItem, {
       width: '300px',
-      data: {todoitem: this.todoitem}
+      data: {todolists: this.parenttodolists}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`The dialog was closed. Dialog result is =>${result}`);
-      this.todoitem = result;
-      event.target.childNodes[1].childNodes[0].nodeValue = this.todoitem;
+      this.parenttodolists = result;
     });
   }
 }
@@ -203,6 +223,7 @@ export interface DialogData {
 })
 
 export class TodoItem {
+  todolists: any = [];
 
   constructor(
     public dialogRef: MatDialogRef<TodoItem>,
@@ -212,4 +233,10 @@ export class TodoItem {
     this.dialogRef.close();
   }
 
+  add(todo:any): void {
+    console.log('新增的項目是 =>',typeof todo);
+    if(!todo){ return; }
+    this.todolists.push(todo);
+    console.log('this.todolist is =>', this.todolists);
+  }
 }
