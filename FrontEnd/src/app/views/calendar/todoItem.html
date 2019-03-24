@@ -1,15 +1,19 @@
-
-<div mat-dialog-content>
-  <p>待辦事項</p>
-  <mat-form-field>
-    <input matInput type="text" [(ngModel)]="data.todoitem"/>
-  </mat-form-field>
-  <ul>
-    <li *ngFor = "let item of todolists">{{item}}</li>
-  </ul>
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">待辦事項</h5>
 </div>
-<div mat-dialog-actions>
+<div>
+  <div class="list-group">
+      <a href="#" [style.background-color]="item.color"  class="list-group-item list-group-item-action" 
+        *ngFor = "let item of todolists">
+        {{item.title}}
+      </a>
+  </div>
+  <div>
+
+  </div>
+</div>
+<div class="modal-footer">
   <button mat-button (click)="onNoClick()">取消</button>
-  <button mat-button (click)="add(data.todoitem)">新增</button>
-  <button mat-button [mat-dialog-close]="todolists" cdkFocusInitial>儲存</button>
+  <button mat-button (click)="add()">新增</button>
+  <button mat-button [mat-dialog-close]="[todolists]" cdkFocusInitial>儲存</button>
 </div>

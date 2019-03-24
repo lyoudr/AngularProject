@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CastExpr } from '@angular/compiler';
   
 /* CalendarComponent */
 @Component({
@@ -18,14 +17,15 @@ export class CalendarComponent implements OnInit {
   initialmonth : any;
   currentmonth: any;
   substractyear: number = 0;
-  parenttodolists: any = [{}];
+  parenttodolists: any;
   weekday: any;
+  listStyles: {};
 
   constructor(public dialog: MatDialog) { }
   
   ngOnInit() {
     this.GetNow();
-  }
+  } 
 
   GetNow(){
     var currenttime = new Date();
@@ -189,14 +189,23 @@ export class CalendarComponent implements OnInit {
     console.log('dateindex is =>', dateindex);
     
     const dialogRef = this.dialog.open(TodoItem, {
-      width: '300px',
+      width: '500px',
+      height: '400px',
       data: {todolists: this.parenttodolists}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`The dialog was closed. Dialog result is =>${result}`);
-      this.datesarray[(dateindex-1)] = { date: date, data: result };
+      let results = result;
+      console.log(`最外層的結果為 =>`, results);
+      this.datesarray[(dateindex-1)] = { date: date, data: results };
+      console.log('this.datesarray is =>',this.datesarray[(dateindex-1)].data[0]);
+      this.listStyles = {
+        'font-size': '12px',
+        'list-style-type':'none'
+      };
     });
+
+    
   }
 }
 
@@ -212,19 +221,44 @@ export interface DialogData {
 
 export class TodoItem {
   todolists: any = [];
+  todocontent: any;
+  color: any;
+  colorlists: any =[];
 
   constructor(
     public dialogRef: MatDialogRef<TodoItem>,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  add(todo:any): void {
-    console.log('新增的項目是 =>',typeof todo);
-    if(!todo){ return; }
-    this.todolists.push(todo);
-    console.log('this.todolist is =>', this.todolists);
+  add(): void {
+    const dialogchildRef = this.dialog.open(TodoContent, {
+      width: '500px',
+      height: '400px',
+      data: {todolists: this.todolists, todocontent: this.todocontent, color: this.color }
+    });
+
+    dialogchildRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed. Dialog result is =>', result);
+      this.todolists.push({title: result[0], color: result[2]});
+      console.log('this.todolists is =>', this.todolists);
+    });
   }
+}
+
+@Component({
+  selector: 'app-todocontent',
+  templateUrl: 'todocontent.html'
+})
+
+export class TodoContent {
+
+  constructor(
+    public dialogRef: MatDialogRef<TodoContent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
 }

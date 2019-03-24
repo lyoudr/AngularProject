@@ -4,6 +4,7 @@ import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './calendar.component';
 import { MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { TodoItem } from './calendar.component';
+import { TodoContent } from './calendar.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -18,10 +19,12 @@ import { FormsModule } from '@angular/forms';
   ],
   declarations: [
     CalendarComponent,
-    TodoItem
+    TodoItem,
+    TodoContent
   ],
   entryComponents:[
-    TodoItem
+    TodoItem,
+    TodoContent
   ]
 })
 export class CalendarModule { }
