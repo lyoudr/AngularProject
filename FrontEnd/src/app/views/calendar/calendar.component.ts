@@ -211,6 +211,9 @@ export class CalendarComponent implements OnInit {
 
 export interface DialogData {
   todoitem: string;
+  todolist: any;
+  todocontent: any;
+  color: any;
 }
 
 /* TodoItem Dialog Component */

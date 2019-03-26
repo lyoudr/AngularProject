@@ -62,6 +62,10 @@ export const routes: Routes = [
             loadChildren: './views/accountlist/accountlist.module#AccountlistModule'
           },
           {
+            path: 'discuss',
+            loadChildren: './views/discuss/discuss.module#DiscussModule'
+          },
+          {
             path: 'base',
             loadChildren: './views/base/base.module#BaseModule'
           },

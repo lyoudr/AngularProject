@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 white">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="col-sm-1.4">#</th>
+            <th class="col-sm-1.4">主題</th>
+            <th class="col-sm-1.4">作者</th>
+            <th class="col-sm-1.4">日期</th>
+            <th class="col-sm-1.4"><i class="fa fa-thumbs-up" style="font-size:18px"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="focus" (click)="GetdiscussInfo(each.index)" *ngFor = "let each of discussions">
+            <th>{{each.rank}}</th>
+            <th>{{each.theme}}</th>
+            <th>{{each.author}}</th>
+            <th>{{each.date}}</th>
+            <th>{{each.good}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <div class="col-md-7 white">
+    <div class="row justify-content-center mt-3">
+      <div class="col-12" *ngIf="classicInformations">
+        <h4 class="text-center">{{classicInformations.title}}</h4>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+      <div class="col-10" *ngIf="classicInformations">
+        <p class="text-center content">{{classicInformations.content}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

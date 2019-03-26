@@ -57,6 +57,11 @@ export const navItems: NavData[] = [
     icon: 'icon-puzzle', 
   },
   {
+    name: '討論區',
+    url: '/discuss',
+    icon: 'icon-star', 
+  },
+  {
     name: 'Base',
     url: '/base',
     icon: 'icon-puzzle',
