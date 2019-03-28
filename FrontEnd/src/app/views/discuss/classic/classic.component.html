@@ -1,38 +1,99 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-5 white">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th class="col-sm-1.4">#</th>
-            <th class="col-sm-1.4">主題</th>
-            <th class="col-sm-1.4">作者</th>
-            <th class="col-sm-1.4">日期</th>
-            <th class="col-sm-1.4"><i class="fa fa-thumbs-up" style="font-size:18px"></i></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="focus" (click)="GetdiscussInfo(each.index)" *ngFor = "let each of discussions">
-            <th>{{each.rank}}</th>
-            <th>{{each.theme}}</th>
-            <th>{{each.author}}</th>
-            <th>{{each.date}}</th>
-            <th>{{each.good}}</th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  <div class="col-md-7 white">
-    <div class="row justify-content-center mt-3">
-      <div class="col-12" *ngIf="classicInformations">
-        <h4 class="text-center">{{classicInformations.title}}</h4>
+<div class="animated fadeIn">
+  <div class="container">
+    <div class="row justify-content-end mb-4">
+      <div class="col-2">
+        <a routerLink="/discuss/classic/post">
+          <button type="button" class="btn btn-block btn-outline-dark active" aria-pressed="true">新增貼文</button>
+        </a>
       </div>
     </div>
-    <div class="row justify-content-center mt-5">
-      <div class="col-10" *ngIf="classicInformations">
-        <p class="text-center content">{{classicInformations.content}}</p>
+    <div class="row">
+      <!--A. 左半部-->
+      <div class="col-md-5 white">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="col-sm-1.4">#</th>
+              <th class="col-sm-1.4">主題</th>
+              <th class="col-sm-1.4">作者</th>
+              <th class="col-sm-1.4">日期
+                <i (click)="Rankdate(1)" class="fa fa-arrow-up" aria-hidden="true"></i>
+                <i (click)="Rankdate(2)" class="fa fa-arrow-down" aria-hidden="true"></i>
+              </th>
+              <th class="col-sm-1.4">
+                <i class="fa fa-thumbs-up" style="font-size:18px"></i>
+                <i (click)="Rank(1)" class="fa fa-arrow-up" aria-hidden="true"></i>
+                <i (click)="Rank(2)" class="fa fa-arrow-down" aria-hidden="true"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="focus" (click)="GetdiscussInfo(each.index)" *ngFor = "let each of discussions">
+              <th>{{each.rank}}</th>
+              <th>{{each.theme}}</th>
+              <th>{{each.author}}</th>
+              <th>{{each.date}}</th>
+              <th>{{each.good}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--B. 右半部-->
+      <div class="col-md-7 white">
+        <!--1. 文章標題-->
+        <div class="row justify-content-center mt-3">
+          <div class="col-12" *ngIf="classicInformations">
+            <h4 class="text-center">{{classicInformations.title}}</h4>
+          </div>
+        </div>
+        <!--2. 文章內容-->
+        <div class="row justify-content-center mt-5">
+          <div class="col-10" *ngIf="classicInformations">
+            <p class="text-center content">{{classicInformations.content}}</p>
+          </div>
+        </div>
+        <!--3. 按讚、留言區塊-->
+        <div class="row justify-content-end mt-4">
+          <div class="btn-group btn-group-sm" role="group">
+            <button type="button" class="btn btn-light"><i class="fa fa-heart-o fa-lg mt-4"></i></button>
+            <button type="button" class="btn btn-secondary" (click)="toggle = !toggle">回覆</button>
+          </div>
+        </div>
+        <!--4. 留言區塊-->
+        <div [ngClass]="{'special': toggle }" class="row justify-content-center mt-4">
+          <div class="col-md-12">
+            <form [formGroup] ="profileForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+              <div>
+                <strong>寫下你的回覆</strong>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <div class="col-md-10">
+                    <textarea formControlName="post" id="textarea-input" name="textarea-input" rows="6" class="form-control" placeholder="寫下你的想法..."></textarea>
+                  </div>
+                </div>
+                <div class="form-group row justify-content-between">
+                  <div class="col-md-4">
+                    <input type="file" id="file-multiple-input" name="file-multiple-input" multiple>
+                  </div>
+                  <div>
+                    <button [disabled]="!profileForm.valid" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--5. 留言-->
+        <div *ngIf="classicInformations" class="row justify-content-center mt-3">
+          <div *ngFor="let each of classicInformations.comments" class="col-md-10 card bg-light mb-3">
+            <div class="card-header">名字</div>
+            <div class="card-body">
+              <p class="card-text mt-3">{{each}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

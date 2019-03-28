@@ -13,12 +13,13 @@ export class DiscussService {
     private http: HttpClient,
     private cookieService: CookieService
   ) { }
-  /*1. 得到"classic" 討論區的列表 */
+  /*1.1 得到"classic" 討論區的列表 */
   Getdiscussion(pagenumber): Observable<Object>{
     let GetedToken = this.cookieService.get('Token');
     const getdiscussionOptions = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + GetedToken.toString(), 
+        'Content-Type':'application/json',
         'Access-Control-Allow-Origin':'*'
       })
     }
@@ -28,7 +29,7 @@ export class DiscussService {
     );
   }
 
-  /*2. 得到 "classic" 每個列表的詳細資訊 */
+  /*1.2 得到 "classic" 每個列表的詳細資訊 */
   GetdiscussInfo(index):Observable<Object>{
     let GetedToken = this.cookieService.get('Token');
     const getdiscussInfoOptions = {
@@ -43,6 +44,39 @@ export class DiscussService {
       );
   }
 
+  /*1.3 Classic 新增貼文 */
+  AddClassicPost(submitForm):Observable<Object>{
+    let GetedToken = this.cookieService.get('Token');
+    const addpostOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + GetedToken.toString(),
+        'Content-Type':'application/json', 
+        'Access-Control-Allow-Origin':'*'
+      })
+    } 
+    let submitedForm = JSON.stringify(submitForm);
+    return this.http.post<Object>(`http://127.0.0.1:3000/classic/submitform`, submitedForm ,addpostOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  /*1.4 對每個貼文留言 */
+  AddComments(comments):Observable<Object>{
+    let GetedToken = this.cookieService.get('Token');
+    const addCommentsoptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + GetedToken.toString(),
+        'Content-Type':'application/json', 
+        'Access-Control-Allow-Origin':'*'
+      })
+    };
+    let Comments = JSON.stringify(comments);
+    return this.http.post<Object>(`http://127.0.0.1:3000/classic/comments`, Comments ,addCommentsoptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   /* Error handling */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

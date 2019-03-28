@@ -1,0 +1,52 @@
+<div class="animated fadeIn">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+        <form [formGroup] ="profileForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+          <div class="card-header">
+            <strong>Basic Form</strong> Elements
+          </div>
+          <div class="card-body">
+              <!--1. 名稱-->
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="name-input">姓名</label>
+                <div class="col-md-4">
+                  <input formControlName="name" type="text" id="name-input" name="name-input" class="form-control" placeholder="姓名">
+                </div>
+              </div>
+              <!--2. 主題-->
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="theme-input">主題</label>
+                <div class="col-md-4">
+                  <input formControlName="theme"  type="theme" id="theme-input" name="theme-input" class="form-control" placeholder="主題" autocomplete="theme">
+                </div>
+              </div>
+              <!--3. 日期-->
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="date-input">日期</label>
+                <div class="col-md-4">
+                  <input formControlName="date" class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="textarea-input">貼文</label>
+                <div class="col-md-8">
+                  <textarea formControlName="post" id="textarea-input" name="textarea-input" rows="12" class="form-control" placeholder="寫下你的想法..."></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label" for="file-multiple-input">上傳圖片</label>
+                <div class="col-md-4">
+                  <input type="file" id="file-multiple-input" name="file-multiple-input" multiple>
+                </div>
+              </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
