@@ -20,7 +20,6 @@ export class ClassicComponent implements OnInit {
   toggle: boolean = true;
   eachpostID: any; 
   currentClass = "fa fa-heart-o fa-lg mt-4";
-  index : number ;
 
   constructor( 
     private discussService : DiscussService,
@@ -65,7 +64,6 @@ export class ClassicComponent implements OnInit {
   /* Get Each Discuss Information and Reply*/
   GetdiscussInfo(index){
     console.log('index is =>',index);
-    this.index = index;
     this.discussService.GetdiscussInfo(index)
       .subscribe((classicinfo)=>{
         console.log('得到的每個音樂家資料', classicinfo)

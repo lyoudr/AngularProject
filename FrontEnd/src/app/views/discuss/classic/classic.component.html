@@ -28,7 +28,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="focus" (click)="GetdiscussInfo(each.index)" *ngFor = "let each of discussions">
+            <tr class="focus" (click)="GetdiscussInfo(each._id)" *ngFor = "let each of discussions">
               <th>{{each.rank}}</th>
               <th>{{each.theme}}</th>
               <th>{{each.author}}</th>

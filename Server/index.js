@@ -699,24 +699,26 @@ server.get('/classicInfo', middleware.checkToken, async (req, res) =>{
     let id = req.query.id;
     let dbInstance = await getDBInstance(url);
     let result = await GetData(dbInstance, 'classicinfo');
-    if(id == 1){
+    if(id == '5c9c28185b02ca014a81ec16'){
         res.json({title: result[0].theme , content: result[0].content, comments: result[0].comments, id: result[0]._id});
-    } else if (id == 2) {
+    } else if (id == '5c9c28185b02ca014a81ec17') {
         res.json({title: result[1].theme , content: result[1].content, comments: result[1].comments, id: result[1]._id});
-    } else if (id == 3) {
+    } else if (id == '5c9c28185b02ca014a81ec18') {
         res.json({title: result[2].theme , content: result[2].content, comments: result[2].comments, id: result[2]._id});
-    } else if (id == 4) {
+    } else if (id == '5c9c28185b02ca014a81ec19') {
         res.json({title:result[3].theme, content: result[3].content, comments: result[3].comments, id: result[3]._id});
-    } else if (id == 5) {
+    } else if (id == '5c9c28185b02ca014a81ec1a') {
         res.json({title:result[4].theme, content: result[4].content, comments: result[4].comments, id: result[4]._id});
-    } else if (id == 6) {
+    } else if (id == '5c9c28185b02ca014a81ec1b') {
         res.json({title:result[5].theme, content: result[5].content, comments: result[5].comments, id: result[5]._id});
-    } else if (id == 7) {
+    } else if (id == '5c9c28185b02ca014a81ec1c') {
         res.json({title:result[6].theme, content: result[6].content, comments: result[6].comments, id: result[6]._id});
-    } else if (id == 8) {
+    } else if (id == '5c9c28185b02ca014a81ec1d') {
         res.json({title:result[7].theme, content: result[7].content, comments: result[7].comments, id: result[7]._id});
-    } else if (id == 9) {
+    } else if (id == '5c9c28185b02ca014a81ec1e') {
         res.json({title:result[8].theme, content: result[8].content, comments: result[8].comments, id: result[8]._id});
+    } else if (id == '5ca0607648c68a039e343eec') {
+        res.json({title:result[9].theme, content: result[9].content, comments: result[9].comments, id: result[9]._id});
     }
 });
 
