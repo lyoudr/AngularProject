@@ -35,13 +35,14 @@ export class ClassicpostComponent implements OnInit {
     console.log(this.profileForm.value);
     console.log(this.profileForm.get('theme'));
     this.submitForm = {
-      "index":"1",
       "rank":"1",
       "theme":this.profileForm.get('theme').value,
       "author":this.profileForm.get('name').value,
       "date":this.profileForm.get('date').value,
-      "good":"6",
-      "content":this.profileForm.get('post').value
+      "good": 0,
+      "content":this.profileForm.get('post').value,
+      "comments":[],
+      "goodcount":'1'
     }
     console.log('交出去的 Form 是 =>', this.submitForm);
     this.discussService.AddClassicPost(this.submitForm)

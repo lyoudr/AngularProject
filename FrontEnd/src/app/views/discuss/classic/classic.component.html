@@ -55,7 +55,7 @@
         <!--3. 按讚、留言區塊-->
         <div class="row justify-content-end mt-4">
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-light"><i class="fa fa-heart-o fa-lg mt-4"></i></button>
+            <button type="button" class="btn btn-light" (click)="SetGoodstatus()"><i [ngClass]="currentClass"></i></button>
             <button type="button" class="btn btn-secondary" (click)="toggle = !toggle">回覆</button>
           </div>
         </div>

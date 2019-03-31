@@ -15,8 +15,12 @@ export class ClassicComponent implements OnInit {
   classicInformations: any;
   switching :boolean = true;
   shouldSwitch : boolean;
+  goodstatus : boolean = false;
+  goodcount : number;
   toggle: boolean = true;
   eachpostID: any; 
+  currentClass = "fa fa-heart-o fa-lg mt-4";
+  index : number ;
 
   constructor( 
     private discussService : DiscussService,
@@ -61,6 +65,7 @@ export class ClassicComponent implements OnInit {
   /* Get Each Discuss Information and Reply*/
   GetdiscussInfo(index){
     console.log('index is =>',index);
+    this.index = index;
     this.discussService.GetdiscussInfo(index)
       .subscribe((classicinfo)=>{
         console.log('得到的每個音樂家資料', classicinfo)
@@ -129,5 +134,22 @@ export class ClassicComponent implements OnInit {
         this.switching = true;
       }
     }
+  }
+
+  /* Set good status */
+  SetGoodstatus(){
+    this.goodstatus = !this.goodstatus;
+    if( this.goodstatus == true ){
+      this.currentClass = "fa fa-heart fa-lg mt-4";
+      this.goodcount = 1;
+    } else {
+      this.currentClass = "fa fa-heart-o fa-lg mt-4";
+      this.goodcount = -1;
+    }
+    this.discussService.AddGood(this.eachpostID, this.goodcount)
+      .subscribe({
+        next(result){ console.log('Response is =>', result) },
+        error(msg){ console.log('Error is =>', msg) }
+      })
   }
 }

@@ -537,10 +537,22 @@ var findDocuments = function(db,callback) {
   });
 }
 //(4) Update Document (add new field to each collection)
-let updateDocuments = async function(db, id, comment, callback){
-    await db.collection('classicinfo').updateOne(
+let updateDocuments = async function(db,  callback){
+    await db.collection('classicinfo').update(
+        {},
+        { $set: { "goodcount": 0 } },
+        { upsert: false,
+          multi: true }
+    );
+    console.log('comments had been added to this post!!');
+    callback();
+}
+
+//(5) Update Document (push data to each field (array))
+let pushDocuments = async function(db, id, replaycomment, callback){
+    await db.collection('classicinfo').update(
         { _id: ObjectID(`${id}`) },
-        { $push: { comments :`${comment}` }}
+        { $push: { goodcount : `${ replaycomment }`}}
     );
     console.log('comments had been added to this post!!');
     callback();
@@ -715,8 +727,8 @@ server.post('/classic/submitform', middleware.checkToken, (req, res)=>{
         db.collection('classicinfo').insertOne(
             req.body, function(err, result) {
             assert.equal(err, null);
-            assert.equal(9, result.result.n);
-            assert.equal(9, result.ops.length);
+            assert.equal(1, result.result.n);
+            assert.equal(1, result.ops.length);
             callback(result);
         })
     }
@@ -724,14 +736,19 @@ server.post('/classic/submitform', middleware.checkToken, (req, res)=>{
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
-        updateDocuments(db, function() {
+        /* 刪除某個 field from all documents */
+        /*db.collection('classicinfo').update(
+            { $unset: { index :""} } , 
+            { multi: true }
+        );*/
+        insertsingleDoc(db, function() {
             findDocuments(db, function() {
             db.close();
             });
         });
     });
     res.json({status: "ok", text: "have written to database"});
-})
+});
 
 /*3.4 Add new Comments to each Post*/
 server.post('/classic/comments', middleware.checkToken, (req, res) =>{
@@ -742,19 +759,51 @@ server.post('/classic/comments', middleware.checkToken, (req, res) =>{
         assert.equal(null, err);
         console.log("Connected successfully to server");
         console.log('dbInstance is =>', db);
-        updateDocuments(db, replayid, replaycomment, function(){
+        pushDocuments(db, replayid, replaycomment, function(){
             console.log('replayid', replayid);
             findDocuments(db, function() {
                 console.log('closed');
                 db.close();
             });
-        })
-    })
+        });
+    });
     res.json({status: "ok", text: "add a new comment to the post"});
-})
+});
+
+/*3.5 Add good to each Post*/
+server.put('/classic/good', middleware.checkToken, (req, res) =>{
+    console.log('按讚是 =>', req.body);
+    let id = req.body.index;
+    let goodcount = req.body.goodcount;
+    MongoClient.connect(url, function(err, db){
+        assert.equal(null, err);
+        /*將某個 field 的 value 從 string 轉成 number*/
+        /*db.collection('classicinfo').find({}).forEach(function(data){
+            db.collection('classicinfo').update(
+                { "_id": data._id }, 
+                { $set: { "good": parseInt(data.good)}
+            });
+        });*/
+        //Modify the good status (good or bad)
+        db.collection('classicinfo').updateOne(
+            { _id: ObjectID(`${id}`) },
+            { $set: { "goodcount" : `${goodcount}` } },
+        );
+        //Modify the good counts 
+        db.collection('classicinfo').update(
+            { _id: ObjectID(`${id}`) },
+            { $inc: { "good": goodcount} }
+        );
+        //Find all data
+        db.collection('classicinfo').find({}).toArray(function(err, docs) {
+            assert.equal(err, null);
+            console.log('docs is =>',docs);
+            db.close();
+        });
+    });
+    res.json({status: "ok", msg : "I've received your good!"});
+});
   
-
-
 
 
 

@@ -41,10 +41,15 @@ export class StoremanageComponent implements OnInit {
   Getstores(number){
     this.pagenumber = number;
     this.storeService.Getstores(this.pagenumber)
-      .subscribe((storeinfo)=>{
-        console.log('Returned Storeinfo is =>', storeinfo);
-        this.storeinformation = storeinfo;
-      })
+      .subscribe({
+        next(storeinfo){ 
+          console.log('Returned Storeinfo is =>', storeinfo);
+          this.storeinformation = storeinfo;
+        },
+        error(msg){
+          console.log('Error is =>', msg);
+        }
+    })
   }
   /* Pagination */
   Getstore(number){

@@ -77,6 +77,28 @@ export class DiscussService {
         catchError(this.handleError)
       );
   }
+
+  /*1.5 增加或減少讚數 */
+  AddGood(index, goodcount):Observable<Object>{
+    let GetedToken = this.cookieService.get('Token');
+    const addGoodsoptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + GetedToken.toString(),
+        'Content-Type':'application/json', 
+        'Access-Control-Allow-Origin':'*'
+      })
+    };
+    let Goodsend = {
+      index : index,
+      goodcount : goodcount
+    }
+    let GoodJSON = JSON.stringify(Goodsend);
+    return this.http.put<Object>(`http://127.0.0.1:3000/classic/good`,GoodJSON,addGoodsoptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   /* Error handling */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
