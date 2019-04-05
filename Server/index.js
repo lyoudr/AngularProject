@@ -24,7 +24,6 @@ server.use(express.static('../FrontEnd/dist'));
 /* Server */
 server.listen(3000, () => { console.log('Server started!'); });
 
-
 /* Generate token */
 class HandlerGenerator {
     login (req, res) {
@@ -36,7 +35,7 @@ class HandlerGenerator {
   
       if (username && password) {
         if (username === mockedUsername && password === mockedPassword) {
-          let token = jwt.sign({username: username},
+          let token = jwt.sign({username: username, password : password},
             config.secret,
             { expiresIn: '24h' // expires in 24 hours
             }
@@ -805,7 +804,45 @@ server.put('/classic/good', middleware.checkToken, (req, res) =>{
     });
     res.json({status: "ok", msg : "I've received your good!"});
 });
-  
+
+/* 4. Restaurant */
+/* 4.1 Get Restaurant */
+server.get('/restaurantlists', middleware.checkToken, (req, res) =>{
+    let page = req.query.page;
+    let classification = req.query.classification;
+    console.log('classification', classification);
+    if(classification == "sweet") {
+        if ( page == 1) {
+            res.json([
+                { name : "咚咚餐廳", price : "500 ~ 800 TWD", comment: "好吃甜甜的", img : "assets/img/restaurant/restaurant-1.jpg" },
+                { name : "哈摟餐廳", price : "300 ~ 600 TWD", comment: "好棒", img : "assets/img/restaurant/restaurant-2.jpg" },
+                { name : "每每餐廳", price : "600 ~ 944 TWD", comment : "吃起來不錯", img : "assets/img/restaurant/restaurant-3.jpg" },
+                { name : "美麗餐廳", price : "500 ~ 1200 TWD", comment : "一定要來吃", img : "assets/img/restaurant/restaurant-4.jpg" }
+            ])
+            console.log('sweet');
+        }
+    } else if (classification == "righteous") {
+        if ( page == 1) {
+            res.json([
+                { name : "義大餐廳", price : "400 ~ 700 TWD", comment: "好吃鹹鹹的", img : "assets/img/restaurant/restaurant-1.jpg" },
+                { name : "樂樂餐廳", price : "200 ~ 800 TWD", comment: "有很多生菜, 不好吃", img : "assets/img/restaurant/restaurant-2.jpg" },
+                { name : "您好餐廳", price : "600 ~ 1000 TWD", comment : "我喜歡它的米飯", img : "assets/img/restaurant/restaurant-3.jpg" },
+                { name : "安安餐廳", price : "500 ~ 800 TWD", comment : "義大利麵好吃", img : "assets/img/restaurant/restaurant-4.jpg" }
+            ])
+            console.log('righteous');
+        }
+    } else if (classification == "chinese") {
+        if ( page == 1) {
+            res.json([
+                { name : "武道餐廳", price : "304 ~ 850 TWD", comment: "很有中國味", img : "assets/img/restaurant/restaurant-1.jpg" },
+                { name : "湯包餐廳", price : "100 ~ 220 TWD", comment: "湯包好吃", img : "assets/img/restaurant/restaurant-2.jpg" },
+                { name : "享用餐廳", price : "230 ~ 340 TWD", comment : "吃起來不錯", img : "assets/img/restaurant/restaurant-3.jpg" },
+                { name : "素菜餐廳", price : "800 ~ 1000 TWD", comment : "菜菜好吃喔", img : "assets/img/restaurant/restaurant-4.jpg" }
+            ])
+            console.log('chinese');
+        }
+    }
+})
 
 
 

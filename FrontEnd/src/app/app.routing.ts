@@ -41,13 +41,13 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
-    canActivate : [LoginGuard],
+    //canActivate : [LoginGuard],
     data: {
       title: 'Home'
     },
     children: [
       { path: '',
-        canActivateChild: [LoginGuard],
+        //canActivateChild: [LoginGuard],
         children: [
           {
             path: 'calendar',
@@ -64,6 +64,10 @@ export const routes: Routes = [
           {
             path: 'discuss',
             loadChildren: './views/discuss/discuss.module#DiscussModule'
+          },
+          {
+            path: 'restaurant',
+            loadChildren: './views/restaurant/restaurant.module#RestaurantModule'
           },
           {
             path: 'base',

@@ -62,6 +62,11 @@ export const navItems: NavData[] = [
     icon: 'icon-star', 
   },
   {
+    name: '餐廳資訊',
+    url: '/restaurant',
+    icon: 'icon-star', 
+  },
+  {
     name: 'Base',
     url: '/base',
     icon: 'icon-puzzle',

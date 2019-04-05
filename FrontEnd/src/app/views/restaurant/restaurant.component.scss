@@ -1,0 +1,37 @@
+
+.googlemap{
+    max-width: 80%;
+    height:auto;
+}
+
+/* Container holding the image and the text */
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/* Centered text */
+.centered {
+    font-size: px;
+    font-weight: bold;
+    position: absolute;
+    top: 58%;
+    left: 58%;
+    transform: translate(-50%, -50%);
+}
+
+/* Checked box */
+.example-h5 {
+    margin: 10px;
+}
+
+.example-section {
+    align-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.example-margin {
+    margin: 0 10px;
+}
