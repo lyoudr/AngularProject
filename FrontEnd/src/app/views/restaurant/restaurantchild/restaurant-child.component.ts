@@ -48,7 +48,7 @@ export class RestaurantChildComponent implements OnInit {
       });
       console.log('items should be sliced =>', sliceditem);
       _.pullAt(this.restaurantlists, sliceditem);
-    } else if (event == false) {
+    } else if(event == false) {
       console.log('this.type is =>', this.type);
       this.resetEvent.emit(`${this.type}`);
     }
