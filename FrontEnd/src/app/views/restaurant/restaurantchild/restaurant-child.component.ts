@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import _ from "lodash";
 
 @Component({
   selector: 'app-restaurant-child',
@@ -7,80 +8,50 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RestaurantChildComponent implements OnInit {
 
-  @Input() restaurantlists: any;
+  @Input() type : any;
+  @Input() restaurantlists: object[];
+  @Output() resetEvent = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  Checkedlow(event: any){
-    console.log('Checkedlow is =>',event);
+  CheckSize(event: any, size : any){
+    console.log('Checked is =>',event);
     console.log("child's restaurant is =>", this.restaurantlists);
-    let newrestaurantlists = this.restaurantlists.find(function(value: any){
-      let str = value.price.trim();
-      let strarr = str.split("~");
-      let extsmall = Number(strarr[0]);
-      let extlarge = Number(strarr[1].match(/\d+/g));
-      console.log('extsmall is =>', extsmall);
-      console.log('extlarge is =>', extlarge);
-      if(extsmall >= 100 && extlarge <= 500) {
-        return value
-      }
-    });
-    console.log('newrestaurantlists is =>', newrestaurantlists);
-    if(newrestaurantlists == undefined){
-      this.restaurantlists = [];
-    } else {
-      this.restaurantlists = newrestaurantlists;
-    }
-  }
-
-  Checkedmedium(event: any){
-    console.log('Checkedmedium is =>',event);
-    console.log("child's restaurant is =>", this.restaurantlists);
+    console.log('Checked size is =>', size);
     if(event == true) {
-      this.restaurantlists.forEach(function(value: any, index: number, object: any){
-        let str = value.price.trim();
-        let strarr = str.split("~");
-        let extsmall = Number(strarr[0]);
-        let extlarge = Number(strarr[1].match(/\d+/g));
-        console.log('extsmall is =>', extsmall);
-        console.log('extlarge is =>', extlarge);
-        if(extsmall < 500 || extlarge > 1000) {
-          object.splice(index, 1);
-        }
+      let sliceditem = [];
+      this.restaurantlists.forEach(
+        function(value: any, index: any, object: any){
+          console.log('index is =>', index);
+          let str = value.price.trim();
+          let strarr = str.split("~");
+          let extsmall = Number(strarr[0]);
+          let extlarge = Number(strarr[1].match(/\d+/g));
+          console.log('extsmall is =>', extsmall);
+          console.log('extlarge is =>', extlarge);
+          if(size == "low"){
+            if(extsmall < 100 || extlarge > 500) {
+              sliceditem.push(index);
+            }
+          } else if(size == "medium"){
+            if(extsmall < 500 || extlarge > 1000) {
+              sliceditem.push(index);
+            }
+          } else if(size == "high"){
+            if(extsmall < 1000 || extlarge > 1500) {
+              sliceditem.push(index);
+            }
+          }
       });
-      console.log('找到的項目是 =>', this.restaurantlists);
+      console.log('items should be sliced =>', sliceditem);
+      _.pullAt(this.restaurantlists, sliceditem);
     } else if (event == false) {
-
-    }
-    /*if(newrestaurantlists == undefined){
-      this.restaurantlists = [];
-    } else {
-      this.restaurantlists = newrestaurantlists;
-    }*/
-  }
-
-  Checkedhigh(event: any){
-    console.log('Checkedhigh is =>',event);
-    console.log("child's restaurant is =>", this.restaurantlists);
-    let newrestaurantlists = this.restaurantlists.find(function(value: any){
-      let str = value.price.trim();
-      let strarr = str.split("~");
-      let extsmall = Number(strarr[0]);
-      let extlarge = Number(strarr[1].match(/\d+/g));
-      console.log('extsmall is =>', extsmall);
-      console.log('extlarge is =>', extlarge);
-      if(extsmall >= 1000 && extlarge <= 1500) {
-        return value
-      }
-    });
-    console.log('newrestaurantlists is =>', newrestaurantlists);
-    if(newrestaurantlists == undefined){
-      this.restaurantlists = [];
-    } else {
-      this.restaurantlists = newrestaurantlists;
+      console.log('this.type is =>', this.type);
+      this.resetEvent.emit(`${this.type}`);
     }
   }
+
 }

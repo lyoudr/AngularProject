@@ -10,15 +10,11 @@
     <mat-card>
       <mat-card-content>
         <h5 class="example-h5">價格範圍</h5>
-        <section class="example-section"> 
-          <mat-checkbox class="example-margin" [(ngModel)]="checkedlow" (change)="Child.Checkedlow(checkedlow)">100 ~ 500 TWD</mat-checkbox>
-        </section>
-        <section class="example-section">
-          <mat-checkbox class="example-margin" [(ngModel)]="checkedmedium" (change)="Child.Checkedmedium(checkedmedium)">500 ~ 1000 TWD</mat-checkbox>
-        </section>
-        <section class="example-section">
-          <mat-checkbox class="example-margin" [(ngModel)]="checkedhigh" (change)="Child.Checkedhigh(checkedhigh)">1000 ~ 1500 TWD</mat-checkbox>
-        </section>
+        <div> 
+          <mat-checkbox class="example-margin" [(ngModel)]="checkedlow" (change)="Child.CheckSize(checkedlow, low)">100 ~ 500 TWD</mat-checkbox>
+          <mat-checkbox class="example-margin" [(ngModel)]="checkedmedium" (change)="Child.CheckSize(checkedmedium, medium)">500 ~ 1000 TWD</mat-checkbox>
+          <mat-checkbox class="example-margin" [(ngModel)]="checkedhigh" (change)="Child.CheckSize(checkedhigh, high)">1000 ~ 1500 TWD</mat-checkbox>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
@@ -27,13 +23,19 @@
       <mat-tab-group [(selectedIndex)]="tabIndex"
                       (focusChange)="tabFocusChange($event)">
           <mat-tab label="甜點" style="height:1000px">
-              <app-restaurant-child [restaurantlists]="restaurantlists" #Child> </app-restaurant-child>
+              <app-restaurant-child 
+                [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
+              </app-restaurant-child>
           </mat-tab>
           <mat-tab label="義士料理" style="height:1000px">
-              <app-restaurant-child [restaurantlists]="restaurantlists" #Child> </app-restaurant-child>
+              <app-restaurant-child 
+                [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
+              </app-restaurant-child>
           </mat-tab>
           <mat-tab label="中士料理" style="height:1000px">
-              <app-restaurant-child [restaurantlists]="restaurantlists" #Child> </app-restaurant-child>
+              <app-restaurant-child 
+                [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
+              </app-restaurant-child>
           </mat-tab>
       </mat-tab-group>
     <nav aria-label="Page navigation example" class="mt-4">
