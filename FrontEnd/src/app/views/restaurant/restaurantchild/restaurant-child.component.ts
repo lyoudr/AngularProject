@@ -11,12 +11,15 @@ export class RestaurantChildComponent implements OnInit {
   @Input() type : any;
   @Input() restaurantlists: object[];
   @Output() resetEvent = new EventEmitter();
+  currency: string = "TWD";
 
   constructor() { }
 
   ngOnInit() {
+    this.currency = "TWD";
   }
 
+  /*1. 價格範圍 */
   CheckSize(event: any, size : any){
     console.log('Checked is =>',event);
     console.log("child's restaurant is =>", this.restaurantlists);
@@ -24,7 +27,7 @@ export class RestaurantChildComponent implements OnInit {
     if(event == true) {
       let sliceditem = [];
       this.restaurantlists.forEach(
-        function(value: any, index: any, object: any){
+        function(value: any, index: any){
           console.log('index is =>', index);
           let str = value.price.trim();
           let strarr = str.split("~");
@@ -54,4 +57,14 @@ export class RestaurantChildComponent implements OnInit {
     }
   }
 
+  /*2. 修改幣別 */
+  ChangeCurrency(checked, currency){
+    console.log('checked is =>', checked);
+    console.log('currency type is =>', currency);
+    if (checked = true) {
+      this.currency = currency;
+    } else if (checked = false) {
+      this.currency = "TWD";
+    }
+  }
 }

@@ -574,6 +574,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+ngx-pipes
+MIT
+
 perfect-scrollbar
 MIT
 The MIT License (MIT) Copyright (c) 2012-2017 Hyunje Jun and other contributors

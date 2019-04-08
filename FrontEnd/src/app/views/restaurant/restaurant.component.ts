@@ -19,6 +19,12 @@ export class RestaurantComponent implements OnInit {
   low : string = "low";
   medium : string = "medium";
   high : string = "high";
+  checkedTWD : boolean = true;
+  checkedJPY : boolean = false;
+  checkedUSD : boolean = false;
+  TWD = "TWD";
+  JPY = "JPY";
+  USD = "USD";
 
   constructor(
     private restaurantService : RestaurantService

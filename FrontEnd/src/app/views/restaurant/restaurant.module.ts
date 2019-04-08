@@ -9,6 +9,9 @@ import { HighlightDirective } from '../../directives/highlight.directive';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { ChangecurrencyPipe } from '../../pipes/changecurrency.pipe';
+import { NgPipesModule } from 'ngx-pipes';
+
 
 @NgModule({
   imports: [
@@ -18,12 +21,14 @@ import { MatCardModule } from '@angular/material/card';
     MatTabsModule,
     MatCheckboxModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    NgPipesModule
   ],
   declarations: [ 
     RestaurantComponent,
     RestaurantChildComponent,
-    HighlightDirective
+    HighlightDirective,
+    ChangecurrencyPipe
   ]
 })
 export class RestaurantModule { }
