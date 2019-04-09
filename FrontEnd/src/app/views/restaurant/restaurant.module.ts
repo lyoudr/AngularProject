@@ -10,8 +10,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { ChangecurrencyPipe } from '../../pipes/changecurrency.pipe';
-import { NgPipesModule } from 'ngx-pipes';
-
 
 @NgModule({
   imports: [
@@ -21,8 +19,7 @@ import { NgPipesModule } from 'ngx-pipes';
     MatTabsModule,
     MatCheckboxModule,
     MatCardModule,
-    FormsModule,
-    NgPipesModule
+    FormsModule
   ],
   declarations: [ 
     RestaurantComponent,
