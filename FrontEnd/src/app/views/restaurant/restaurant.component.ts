@@ -19,7 +19,7 @@ export class RestaurantComponent implements OnInit {
   low : string = "low";
   medium : string = "medium";
   high : string = "high";
-  checkedTWD : boolean = true;
+  checkedTWD : boolean = false;
   checkedJPY : boolean = false;
   checkedUSD : boolean = false;
   TWD = "TWD";

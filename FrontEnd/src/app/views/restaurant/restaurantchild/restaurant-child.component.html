@@ -4,7 +4,7 @@
         <img  class="img-fluid rounded mt-3 ml-3 mb-3" src= "{{restaurant.img}}" />
         <div class="ml-5 mt-3">
             <p>{{ restaurant.name }}</p>
-            <p class="text-justify">{{ restaurant.price | changecurrency : currency }}</p>
+            <p class="text-justify">{{ restaurant.price  | changecurrency : currency}}</p>
             <p class="text-justify">{{ restaurant.comment }}</p>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>

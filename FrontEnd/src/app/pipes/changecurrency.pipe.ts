@@ -5,9 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ChangecurrencyPipe implements PipeTransform {
   precurrency : string = "TWD";
-  newcurrencyarray = [];
 
-  transform(value: string, currency?: string): any {
+  transform(value: string, currency: string): any {
     let str = value.trim();
     let strarr = str.split("~");
     let extsmall = Number(strarr[0]);
@@ -17,23 +16,18 @@ export class ChangecurrencyPipe implements PipeTransform {
     
     if (this.precurrency == "TWD"){
       if (currency == "TWD"){
-        this.precurrency = currency;
-        this.newcurrencyarray.push(value);
+        console.log('value is =>', value);
+        return (value);
       } else if(currency == "USD"){
-        this.precurrency = currency;
-        console.log('結果是 =>', Math.round(extsmall/30.5) + ' ~ ' + Math.round(extlarge/30.5) + 'TWD');
-        this.newcurrencyarray.push(Math.round(extsmall/30.5) + ' ~ ' + Math.round(extlarge/30.5) + 'TWD');
+        console.log(Math.round(extsmall/30.5) + ' ~ ' + Math.round(extlarge/30.5) + 'USD');
+        return(Math.round(extsmall/30.5).toString() + ' ~ ' + Math.round(extlarge/30.5).toString() + 'USD');
       } else if(currency == "JPY"){
-        this.precurrency = currency;
-        console.log('結果是 =>', Math.round(extsmall*3.63) + ' ~ ' + Math.round(extlarge*3.63) + 'TWD');
-        this.newcurrencyarray.push(Math.round(extsmall*3.63) + ' ~ ' + Math.round(extlarge*3.63) + 'JPY');
+        return(Math.round(extsmall*3.63) + ' ~ ' + Math.round(extlarge*3.63) + 'JPY');
       }
-      console.log('新的 currencyarray 是 =>', this.newcurrencyarray);
     } else if (this.precurrency == "USD"){
 
     } else if (this.precurrency == "JPY"){
 
     }
   }
-
 }
