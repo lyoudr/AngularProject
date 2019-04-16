@@ -511,10 +511,10 @@ server.get('/classicDiscuss', middleware.checkToken, async (req, res) =>{
     let page = req.query.page;
     if(page == 1){
         let dbInstance = await getDBInstance(url);
+        console.log('dbInstance is =>', dbInstance);
         let result = await GetData(dbInstance, 'classicinfo');
         console.log('結果是 =>', result[0].theme);
         res.json(result);
-
     res.json()
     } else if (page == 2){
         return res.json(Stores.store2)
