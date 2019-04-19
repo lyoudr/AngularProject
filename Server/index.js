@@ -469,7 +469,7 @@ let updateDocuments = async function(db,  callback){
 let pushDocuments = async function(db, id, replaycomment, callback){
     await db.collection('classicinfo').update(
         { _id: ObjectID(`${id}`) },
-        { $push: { goodcount : `${ replaycomment }`}}
+        { $push: { comments : `${ replaycomment }`}}
     );
     console.log('comments had been added to this post!!');
     callback();
@@ -530,30 +530,34 @@ server.get('/classicInfo', middleware.checkToken, async (req, res) =>{
     let dbInstance = await getDBInstance(url);
     let result = await GetData(dbInstance, 'classicinfo');
     if(id == '5c9c28185b02ca014a81ec16'){
-        res.json({title: result[0].theme , content: result[0].content, comments: result[0].comments, id: result[0]._id});
+        res.json({title: result[8].theme , content: result[8].content, comments: result[8].comments, id: result[8]._id});
     } else if (id == '5c9c28185b02ca014a81ec17') {
         res.json({title: result[1].theme , content: result[1].content, comments: result[1].comments, id: result[1]._id});
     } else if (id == '5c9c28185b02ca014a81ec18') {
-        res.json({title: result[2].theme , content: result[2].content, comments: result[2].comments, id: result[2]._id});
+        res.json({title: result[0].theme , content: result[0].content, comments: result[0].comments, id: result[0]._id});
     } else if (id == '5c9c28185b02ca014a81ec19') {
-        res.json({title:result[3].theme, content: result[3].content, comments: result[3].comments, id: result[3]._id});
+        res.json({title:result[2].theme, content: result[2].content, comments: result[2].comments, id: result[2]._id});
     } else if (id == '5c9c28185b02ca014a81ec1a') {
-        res.json({title:result[4].theme, content: result[4].content, comments: result[4].comments, id: result[4]._id});
-    } else if (id == '5c9c28185b02ca014a81ec1b') {
         res.json({title:result[5].theme, content: result[5].content, comments: result[5].comments, id: result[5]._id});
+    } else if (id == '5c9c28185b02ca014a81ec1b') {
+        res.json({title:result[4].theme, content: result[4].content, comments: result[4].comments, id: result[4]._id});
     } else if (id == '5c9c28185b02ca014a81ec1c') {
-        res.json({title:result[6].theme, content: result[6].content, comments: result[6].comments, id: result[6]._id});
+        res.json({title:result[3].theme, content: result[3].content, comments: result[3].comments, id: result[3]._id});
     } else if (id == '5c9c28185b02ca014a81ec1d') {
         res.json({title:result[7].theme, content: result[7].content, comments: result[7].comments, id: result[7]._id});
     } else if (id == '5c9c28185b02ca014a81ec1e') {
-        res.json({title:result[8].theme, content: result[8].content, comments: result[8].comments, id: result[8]._id});
+        res.json({title:result[6].theme, content: result[8].content, comments: result[8].comments, id: result[8]._id});
     } else if (id == '5ca0607648c68a039e343eec') {
-        res.json({title:result[9].theme, content: result[9].content, comments: result[9].comments, id: result[9]._id});
+        res.json({title:result[10].theme, content: result[10].content, comments: result[10].comments, id: result[10]._id});
+    } else if (id == '5cb70447a47150095d0b654b') {
+        res.json({title:result[11].theme, content: result[11].content, comments: result[11].comments, id: result[11]._id});
+    } else if (id == '5cb7084f2595af098238c1bd') {
+        res.json({title:result[12].theme, content: result[12].content, comments: result[12].comments, id: result[12]._id});
     }
 });
 
 /*3.3 Classic Post */
-server.post('/classic/submitform', middleware.checkToken, (req, res)=>{
+server.post('/classic/submitform', middleware.checkToken, (req, res) => {
     console.log('新增的貼文是 =>',req.body); 
     var insertsingleDoc = function(db, callback) {
         db.collection('classicinfo').insertOne(
@@ -562,7 +566,8 @@ server.post('/classic/submitform', middleware.checkToken, (req, res)=>{
             assert.equal(1, result.result.n);
             assert.equal(1, result.ops.length);
             callback(result);
-        })
+            }
+        );
     }
     //(4) Use connect method to connect to the server
     MongoClient.connect(url, function(err, db) {

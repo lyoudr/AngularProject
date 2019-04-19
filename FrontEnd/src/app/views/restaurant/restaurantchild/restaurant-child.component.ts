@@ -16,7 +16,7 @@ export class RestaurantChildComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.currency = "USD";
+    this.currency = "TWD";
   }
 
   /*1. 價格範圍 */
