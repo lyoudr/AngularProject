@@ -11,6 +11,7 @@ const middleware = require('./middleware');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const ObjectID = require('mongodb').ObjectID;
+const upload = require('./upload');
 
 /* Allow bodyParser */
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -650,35 +651,38 @@ server.get('/restaurantlists', middleware.checkToken, (req, res) =>{
     if(classification == "sweet") {
         if ( page == 1) {
             res.json([
-                { name : "咚咚餐廳", price : "100 ~ 200 TWD", comment: "好吃甜甜的", img : "assets/img/restaurant/restaurant-1.jpg" },
-                { name : "哈摟餐廳", price : "300 ~ 600 TWD", comment: "好棒", img : "assets/img/restaurant/restaurant-2.jpg" },
-                { name : "每每餐廳", price : "600 ~ 944 TWD", comment : "吃起來不錯", img : "assets/img/restaurant/restaurant-3.jpg" },
-                { name : "美麗餐廳", price : "500 ~ 1200 TWD", comment : "一定要來吃", img : "assets/img/restaurant/restaurant-4.jpg" }
+                { name : "咚咚餐廳", price : "100 ~ 200 TWD", comment: "好吃甜甜的", img : "assets/img/restaurant/restaurant-1.jpg", id : "01" },
+                { name : "哈摟餐廳", price : "300 ~ 600 TWD", comment: "好棒", img : "assets/img/restaurant/restaurant-2.jpg", id : "02" },
+                { name : "每每餐廳", price : "600 ~ 944 TWD", comment : "吃起來不錯", img : "assets/img/restaurant/restaurant-3.jpg", id : "03"},
+                { name : "美麗餐廳", price : "500 ~ 1200 TWD", comment : "一定要來吃", img : "assets/img/restaurant/restaurant-4.jpg", id : "04" }
             ])
             console.log('sweet');
         }
     } else if (classification == "righteous") {
         if ( page == 1) {
             res.json([
-                { name : "義大餐廳", price : "400 ~ 700 TWD", comment: "好吃鹹鹹的", img : "assets/img/restaurant/restaurant-1.jpg" },
-                { name : "樂樂餐廳", price : "500 ~ 600 TWD", comment: "有很多生菜, 不好吃", img : "assets/img/restaurant/restaurant-2.jpg" },
-                { name : "您好餐廳", price : "600 ~ 900 TWD", comment : "我喜歡它的米飯", img : "assets/img/restaurant/restaurant-3.jpg" },
-                { name : "安安餐廳", price : "500 ~ 800 TWD", comment : "義大利麵好吃", img : "assets/img/restaurant/restaurant-4.jpg" }
+                { name : "義大餐廳", price : "400 ~ 700 TWD", comment: "好吃鹹鹹的", img : "assets/img/restaurant/restaurant-1.jpg", id : "05" },
+                { name : "樂樂餐廳", price : "500 ~ 600 TWD", comment: "有很多生菜, 不好吃", img : "assets/img/restaurant/restaurant-2.jpg", id : "06" },
+                { name : "您好餐廳", price : "600 ~ 900 TWD", comment : "我喜歡它的米飯", img : "assets/img/restaurant/restaurant-3.jpg", id : "07" },
+                { name : "安安餐廳", price : "500 ~ 800 TWD", comment : "義大利麵好吃", img : "assets/img/restaurant/restaurant-4.jpg", id : "08" }
             ])
             console.log('righteous');
         }
     } else if (classification == "chinese") {
         if ( page == 1) {
             res.json([
-                { name : "武道餐廳", price : "304 ~ 850 TWD", comment: "很有中國味", img : "assets/img/restaurant/restaurant-1.jpg" },
-                { name : "湯包餐廳", price : "100 ~ 220 TWD", comment: "湯包好吃", img : "assets/img/restaurant/restaurant-2.jpg" },
-                { name : "享用餐廳", price : "230 ~ 340 TWD", comment : "吃起來不錯", img : "assets/img/restaurant/restaurant-3.jpg" },
-                { name : "素菜餐廳", price : "800 ~ 1000 TWD", comment : "菜菜好吃喔", img : "assets/img/restaurant/restaurant-4.jpg" }
+                { name : "武道餐廳", price : "304 ~ 850 TWD", comment: "很有中國味", img : "assets/img/restaurant/restaurant-1.jpg", id : "09" },
+                { name : "湯包餐廳", price : "100 ~ 220 TWD", comment: "湯包好吃", img : "assets/img/restaurant/restaurant-2.jpg", id : "10" },
+                { name : "享用餐廳", price : "230 ~ 340 TWD", comment : "吃起來不錯", img : "assets/img/restaurant/restaurant-3.jpg", id : "11" },
+                { name : "素菜餐廳", price : "800 ~ 1000 TWD", comment : "菜菜好吃喔", img : "assets/img/restaurant/restaurant-4.jpg", id : "12" }
             ])
             console.log('chinese');
         }
     }
-})
+});
+
+/*4.2 Upload Imgaes about restaurants */
+server.post('/postimages', middleware.checkToken, upload);
 
 
 

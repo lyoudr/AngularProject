@@ -16,10 +16,8 @@ export class ChangecurrencyPipe implements PipeTransform {
     
     if (this.precurrency == "TWD"){
       if (currency == "TWD"){
-        console.log('value is =>', value);
         return (value);
       } else if(currency == "USD"){
-        console.log(Math.round(extsmall/30.5) + ' ~ ' + Math.round(extlarge/30.5) + 'USD');
         return(Math.round(extsmall/30.5).toString() + ' ~ ' + Math.round(extlarge/30.5).toString() + 'USD');
       } else if(currency == "JPY"){
         return(Math.round(extsmall*3.63) + ' ~ ' + Math.round(extlarge*3.63) + 'JPY');
