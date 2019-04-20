@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RestaurantService } from '../../../../services/restaurant.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from './dialog/dialog.component';
 
@@ -11,8 +10,7 @@ import { DialogComponent } from './dialog/dialog.component';
 export class EachrestaurantComponent implements OnInit {
   selectedFile: File
   constructor(
-    public dialog: MatDialog,
-    private restaurantService: RestaurantService
+    public dialog: MatDialog
   ){}
 
   ngOnInit() {

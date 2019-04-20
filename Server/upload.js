@@ -4,15 +4,15 @@ const fs = require('fs');
 module.exports = function upload(req, res) {
   var form = new IncomingForm();
   let readStream;
-  form.on('file', (field, file) => {
+  form.on('file', (field, file  ) => {
     // Do something with the file
     // e.g. save it to the database
     // you can access it using file.path
-    console.log('file', file.name);
+    console.log('file.path =>', file.path);
     readStream = fs.createReadStream(file.path);
   });
   form.on('end', () => {
-    res.json();
+    res.json({'status': 'ok', 'complete': '200'});
   });
   form.parse(req);
 };

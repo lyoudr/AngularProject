@@ -18,7 +18,6 @@ import {
   MatProgressBarModule,
 } from '@angular/material'
 import { DialogComponent } from './restaurantchild/eachrestaurant/dialog/dialog.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HttpClientModule } from '@angular/common/http'
 
@@ -35,7 +34,6 @@ import { HttpClientModule } from '@angular/common/http'
     MatDialogModule,
     MatListModule,
     MatProgressBarModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule
   ],
@@ -46,6 +44,7 @@ import { HttpClientModule } from '@angular/common/http'
     HighlightDirective,
     ChangecurrencyPipe,
     EachrestaurantComponent
-  ]
+  ],
+  entryComponents: [ DialogComponent ]
 })
 export class RestaurantModule { }

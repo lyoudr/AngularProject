@@ -682,7 +682,7 @@ server.get('/restaurantlists', middleware.checkToken, (req, res) =>{
 });
 
 /*4.2 Upload Imgaes about restaurants */
-server.post('/postimages', middleware.checkToken, upload);
+server.post('/postimages', upload);
 
 
 
