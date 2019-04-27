@@ -1,19 +1,27 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RestaurantService } from '../../../../../services/restaurant.service';
 import { forkJoin } from 'rxjs';
 
+export interface DialogData {
+  source: HTMLElement;
+}
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog,component.scss']
 })
 export class DialogComponent implements OnInit {
+
   @ViewChild('file') file;
 
   public files: Set<File> = new Set();
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>, public restaurantService: RestaurantService) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>, 
+    public restaurantService: RestaurantService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
 
   ngOnInit() {}
 
@@ -40,7 +48,8 @@ export class DialogComponent implements OnInit {
   closeDialog() {
     // if everything was uploaded already, just close the dialog
     if (this.uploadSuccessful) {
-      return this.dialogRef.close();
+      console.log('this.data.source is =>', this.data.source);
+      return this.dialogRef.close(this.data.source);
     }
 
     // set the component state to "uploading"
@@ -48,9 +57,16 @@ export class DialogComponent implements OnInit {
 
     // start the upload and save the progress map
     this.progress = this.restaurantService.upload(this.files);
-    console.log(this.progress);
+  
     for (const key in this.progress) {
-      this.progress[key].progress.subscribe(val => console.log(val));
+      this.progress[key].progress.subscribe((val) => { console.log('val is =>',val) });
+      this.progress[key].returneddata.subscribe((imgval) => { 
+      console.log('imgval is =>', imgval)
+      var img = document.createElement('img');
+      img.src = `data:image/png;base64, ${imgval}`;
+      document.getElementById('images').appendChild(img);
+      this.data.source = img;
+      });
     }
 
     // convert the progress map into an array

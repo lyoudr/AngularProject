@@ -10,7 +10,7 @@
   <!-- This is the content of the dialog, containing a list of the files to upload -->
   <mat-dialog-content fxFlex>
     <mat-list>
-      <mat-list-item *ngFor="let file of files">
+      <mat-list-item id="images" *ngFor="let file of files">
 
         <h4 mat-line>{{file.name}}</h4>
 

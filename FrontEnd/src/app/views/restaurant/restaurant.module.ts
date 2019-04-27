@@ -20,6 +20,8 @@ import {
 import { DialogComponent } from './restaurantchild/eachrestaurant/dialog/dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HttpClientModule } from '@angular/common/http'
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { CdkVirtualScrollDataSourceExample } from './restaurantchild/eachrestaurant/CdkVirtualScroll.component';
 
 @NgModule({
   imports: [
@@ -35,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http'
     MatListModule,
     MatProgressBarModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    ScrollDispatchModule
   ],
   declarations: [ 
     RestaurantComponent,
@@ -43,7 +46,8 @@ import { HttpClientModule } from '@angular/common/http'
     DialogComponent,
     HighlightDirective,
     ChangecurrencyPipe,
-    EachrestaurantComponent
+    EachrestaurantComponent,
+    CdkVirtualScrollDataSourceExample
   ],
   entryComponents: [ DialogComponent ]
 })

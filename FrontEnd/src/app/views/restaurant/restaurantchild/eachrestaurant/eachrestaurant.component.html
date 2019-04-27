@@ -1,18 +1,4 @@
 <!-- Grid row -->
-<div class="row">
-
-  <!-- Grid column -->
-  <div class="col-md-12 d-flex justify-content-center mb-5">
-
-    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
-    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">Mountains</button>
-    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">Sea</button>
-
-  </div>
-  <!-- Grid column -->
-
-</div>
-<!-- Grid row -->
 
 <!-- Grid row -->
 <div class="gallery" id="gallery">
@@ -42,13 +28,13 @@
   <!-- Grid column -->
 
   <!-- Grid column -->
-  <div class="mb-3 pics animation all 2">
+  <div class="c">
     <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" alt="Card image cap">
   </div>
   <!-- Grid column -->
 
   <!-- Grid column -->
-  <div class="mb-3 pics animation all 1">
+  <div class="c">
     <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Vertical/mountain3.jpg" alt="Card image cap">
   </div>
   <!-- Grid column -->
@@ -57,5 +43,11 @@
 <!-- Grid row -->
 
 <div class="row">
-  <button mat-raised-button (click)="openUploadDialog()">Upload</button>
+  <button mat-raised-button (click)="openUploadDialog()">新增照片</button>
+</div>
+<app-cdkvirtualscroll></app-cdkvirtualscroll>
+<div class="row">
+  <div class="col-sm restaurant">評論</div>
+  <div class="col-sm restaurant">菜單</div>
+  <div class="col-sm restaurant">Google map</div>
 </div>

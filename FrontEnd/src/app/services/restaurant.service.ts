@@ -40,9 +40,14 @@ export class RestaurantService {
   }
 
   /*2. Upload images */
-  public upload(files: Set<File>): { [key: string]: { progress: Observable<number> } } {
+  public upload(files: Set<File>): { [key: string]: { progress: Observable<number> , returneddata : Observable<any> } } {
     // this will be the our resulting map
-    const status: { [key: string]: { progress: Observable<number> } } = {};
+    const status: { 
+      [key: string]: { 
+        progress: Observable<number>, 
+        returneddata : Observable<any> 
+      }
+    } = {};
 
     files.forEach(file => {
       // create a new multipart-form for every file
@@ -52,11 +57,13 @@ export class RestaurantService {
       // create a http-post request and pass the form
       // tell it to report the upload progress
       const req = new HttpRequest("POST", 'http://127.0.0.1:3000/postimages', formData, {
-        reportProgress: true
+        reportProgress: true,
+        responseType: 'text'
       });
 
       // create a new progress-subject for every file
       const progress = new Subject<number>();
+      const returneddata = new Subject<any>();
 
       // send the http-request and subscribe for progress-updates
 
@@ -64,7 +71,6 @@ export class RestaurantService {
       this.http.request(req).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           // calculate the progress percentage
-
           const percentDone = Math.round((100 * event.loaded) / event.total);
           // pass the percentage into the progress-stream
           progress.next(percentDone);
@@ -72,12 +78,15 @@ export class RestaurantService {
           // Close the progress-stream if we get an answer form the API
           // The upload is complete
           progress.complete();
+          returneddata.next(event.body);
+          returneddata.complete();
         }
       });
 
       // Save every progress-observable in a map of all observables
       status[file.name] = {
-        progress: progress.asObservable()
+        progress: progress.asObservable(),
+        returneddata : returneddata.asObservable()
       };
     });
 
@@ -85,6 +94,22 @@ export class RestaurantService {
     return status;
   }
 
+  /*3. GetBig Data */
+  public GetBigData(): Observable<any> {
+    let GetedToken = this.cookieService.get('Token');
+    const getBigDataOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + GetedToken.toString(), 
+        'Content-Type':'application/json',
+        'Access-Control-Allow-Origin':'*'
+      })
+    };
+    return this.http.get<any>('http://127.0.0.1:3000/getbigdata', getBigDataOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  
   /* Error handling */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
