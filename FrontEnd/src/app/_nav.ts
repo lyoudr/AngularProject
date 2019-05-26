@@ -67,6 +67,11 @@ export const navItems: NavData[] = [
     icon: 'icon-star', 
   },
   {
+    name: '大數據',
+    url: '/bigdata',
+    icon: 'icon-star'
+  },
+  {
     name: 'Base',
     url: '/base',
     icon: 'icon-puzzle',

@@ -109,6 +109,22 @@ export class RestaurantService {
         catchError(this.handleError)
       );
   }
+
+  /*3. GetBig Data2 */
+  public GetBigData2(): Observable<any> {
+    let GetedToken = this.cookieService.get('Token');
+    const getBigDataOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + GetedToken.toString(), 
+        'Content-Type':'application/json',
+        'Access-Control-Allow-Origin':'*'
+      })
+    };
+    return this.http.get<any>('http://127.0.0.1:3000/getbigdata2', getBigDataOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   
   /* Error handling */
   private handleError(error: HttpErrorResponse) {

@@ -70,6 +70,10 @@ export const routes: Routes = [
             loadChildren: './views/restaurant/restaurant.module#RestaurantModule'
           },
           {
+            path: 'bigdata',
+            loadChildren: './views/big-data/big-data.module#BigDataModule'
+          },
+          {
             path: 'base',
             loadChildren: './views/base/base.module#BaseModule'
           },

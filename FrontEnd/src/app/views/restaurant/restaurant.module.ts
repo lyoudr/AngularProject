@@ -21,7 +21,6 @@ import { DialogComponent } from './restaurantchild/eachrestaurant/dialog/dialog.
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { HttpClientModule } from '@angular/common/http'
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
-import { CdkVirtualScrollDataSourceExample } from './restaurantchild/eachrestaurant/CdkVirtualScroll.component';
 
 @NgModule({
   imports: [
@@ -46,8 +45,7 @@ import { CdkVirtualScrollDataSourceExample } from './restaurantchild/eachrestaur
     DialogComponent,
     HighlightDirective,
     ChangecurrencyPipe,
-    EachrestaurantComponent,
-    CdkVirtualScrollDataSourceExample
+    EachrestaurantComponent
   ],
   entryComponents: [ DialogComponent ]
 })
