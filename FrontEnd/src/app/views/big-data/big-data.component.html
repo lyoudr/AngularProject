@@ -1,0 +1,13 @@
+<p>
+  big-data works!
+</p>
+<app-cdkvirtualscroll></app-cdkvirtualscroll>
+<!--Chat Area-->
+<div>
+  <div *ngFor= "let eachMessage of TextAreaMessage">
+    {{eachMessage.Name}}: {{eachMessage.Message}}
+  </div>
+</div>
+  Name: <input #Name/>
+  Chat Area<input #Chat/>
+<button (click)="ConnectWebSocket(Chat.value, Name.value)" id="btn">Send</button>

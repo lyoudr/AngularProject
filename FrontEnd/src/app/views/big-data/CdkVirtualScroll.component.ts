@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { RestaurantService } from '../../../../services/restaurant.service';
+import { RestaurantService } from '../../services/restaurant.service';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
   template: `
     <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
         <div *cdkVirtualFor="let item of ds; templateCacheSize: 0" class="example-item">
-            {{ item.o_tlc_agency_name || 'Loading...'}}
+            {{ item.SBMNAME || 'Loading...'}}
         </div>
     </cdk-virtual-scroll-viewport>`,
   styles: ['.example-viewport { height: 200px; width: 50%;border: 1px solid black;} .example-item {height: 50px;}'],
