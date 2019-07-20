@@ -41,13 +41,13 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
-    //canActivate : [LoginGuard],
+    canActivate : [LoginGuard],
     data: {
       title: 'Home'
     },
     children: [
       { path: '',
-        //canActivateChild: [LoginGuard],
+        canActivateChild: [LoginGuard],
         children: [
           {
             path: 'calendar',

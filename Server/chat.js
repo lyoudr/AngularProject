@@ -17,16 +17,31 @@ var socket = new WebSocketServer({
 });
 var connections = [];
 socket.on('request', function(request) {
-  console.log('request origin is =>', request.origin);
   var connection = request.accept('echo-protocol', request.origin);
-  connections.push(connection);
-  console.log('client origin is =>', connections);
+  let prevname;
   //On message
   connection.on('message', function(message) {
+    let receivedMessage = JSON.parse(message.utf8Data);
+    console.log('receivedMessage is =>', receivedMessage)
+    let namelist = [];
+    if(receivedMessage.name != prevname){
+      connections.push(connection);
+      console.log('client origin is =>', connections);
+      console.log('connections.length is =>',connections.length);
+      namelist.push(receivedMessage.name);
+      prevname = receivedMessage.name;
+    } else {
+      return;
+    }
     if (message.type === 'utf8') {
         console.log('Received Message: ' + message.utf8Data);
         for(var i = 0; i < connections.length; i++) {
-          connections[i].sendUTF(message.utf8Data);
+          if (i == namelist.indexOf[`${receivedMessage.name}`]) {
+            continue;
+          } else {
+            connections[i].sendUTF(receivedMessage.message);
+          }
+          
         }
     }
     else if (message.type === 'binary') {
