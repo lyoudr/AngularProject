@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input,ViewChild, ComponentFactoryResolver } from '@angular/core';
+
+import { AdDirective } from './chat_dynamic/ad.directive';
+import { AdItem }      from './chat_dynamic/ad-item';
+import { AdComponent } from './chat_dynamic/ad.component';
+import { AdService } from './chat_dynamic/ad.service';
 
 @Component({
   selector: 'app-big-data',
@@ -6,60 +11,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./big-data.component.scss']
 })
 export class BigDataComponent implements OnInit {
-  
-  constructor() { }
+  ads : AdItem[];
+  currentAdIndex = -1;
+  @ViewChild(AdDirective) adHost : AdDirective;;
 
-  TextAreaMessage: any[] = [];
-  socket : any;
-  name : string;
-  self : boolean;
-  chatstyle : any;
-  
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private adService : AdService
+  ) { }
+
   ngOnInit() {
-    // Create WebSocket connection.
-    this.socket = new WebSocket('ws://127.0.0.1:8080', 'echo-protocol');
-    
-    // Connection opened
-    this.socket.onopen = () => {
-      console.log('connect to websocket');
-    };
-
-    // Error occured
-    this.socket.onerror = (error) => {
-      console.log(`WebSocket error : ${error}`);
-    }
-
-    this.chatstyle= {
-      height: '50%',
-      overflow : 'scroll'
-    }
+    this.ads = this.adService.getAds();
   }
 
-  /*Client WebSocket*/
-  ConnectWebSocket (message:string ,name:string){
-    console.log('Inserted data is =>', message);
-    this.name = name;
-    const sendingMessages = {
-      name : name,
-      message : message
+  loadComponent(componenttype) {
+    // Define which component to load when clicking differenet button
+    switch (componenttype){
+      case 'chat':
+        this.currentAdIndex = 0;
+        break;
     }
-    // If this.socket is conneced, sending messages
-    this.socket.send(JSON.stringify(sendingMessages));
-
-    // Error occured
-    this.socket.onerror = (error) => {
-      console.log(`WebSocket error : ${error}`);
-    }
-    // Listen for messages
-    this.socket.onmessage = (event) => {
-      console.log('Received data from server is =>', event.data);
-      let receivedMsg = JSON.parse(event.data);
-      if(receivedMsg.name !== this.name){
-        this.self = false;
-      } else if(receivedMsg.name === this.name) {
-        this.self = true;
+    const adItem = this.ads[this.currentAdIndex];
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
+    const viewContainerRef = this.adHost.viewContainerRef;
+    viewContainerRef.clear();
+    const componentRef = viewContainerRef.createComponent(componentFactory);
+    (<AdComponent>componentRef.instance).isClose.subscribe((result) => {
+      console.log('result is =>', result);
+      switch(result){
+        case true:
+          viewContainerRef.clear();
+          break;
       }
-      this.TextAreaMessage.push({"Name": receivedMsg.name, "Message": receivedMsg.message});
-    }
+    }) 
   }
 }

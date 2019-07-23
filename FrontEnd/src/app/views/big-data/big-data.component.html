@@ -1,27 +1,12 @@
+<div class="row justify-content-end">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button (click) = "loadComponent('chat')" type="button" class="btn btn-secondary">
+      Chat Area
+    </button>
+    <button type="button" class="btn btn-secondary">Middle</button>
+    <button type="button" class="btn btn-secondary">Right</button>
+  </div>
+</div>
+<ng-template ad-host></ng-template>
 <app-cdkvirtualscroll></app-cdkvirtualscroll>
-<!--Chat Area-->
-<div class="row justify-content-center mt-5">
-  <h5 class="ml-5 mb-4">Chat Room </h5>
-  <div class="border-0" [style]= "chatstyle" class="col-12 col-md-8">
-    <div [style.margin-left]="self ? '150px' : '0px' " *ngFor= "let eachMessage of TextAreaMessage">
-      {{eachMessage.Name}}: {{eachMessage.Message}}
-    </div>
-  </div>
-</div>
-<div class="row justify-content-center">
-  <div class="col-12 col-md-8">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Name </span>
-      </div>
-      <input type="text" class="form-control" #Name/>
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Chat  </span>
-      </div>
-      <input type="text" class="form-control" #Chat/>
-    </div>
-    <button type="button" class="btn btn-dark mt-3 ml-5" (click)="ConnectWebSocket(Chat.value, Name.value)" id="btn">Send</button>
-  </div>
-</div>
+
