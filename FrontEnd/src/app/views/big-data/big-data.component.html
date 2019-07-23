@@ -1,12 +1,13 @@
 <div class="row justify-content-end">
   <div class="btn-group" role="group" aria-label="Basic example">
-    <button (click) = "loadComponent('chat')" type="button" class="btn btn-secondary">
+    <button (click) = "loadComponent('chat', $event)" type="button" class="btn btn-secondary">
       Chat Area
     </button>
     <button type="button" class="btn btn-secondary">Middle</button>
     <button type="button" class="btn btn-secondary">Right</button>
   </div>
 </div>
+<div (click) = "Console()">click</div>
 <ng-template ad-host></ng-template>
 <app-cdkvirtualscroll></app-cdkvirtualscroll>
 

@@ -8,12 +8,13 @@ import { ChatComponent } from './chat_dynamic/chat.component';
 import { AdDirective } from './chat_dynamic/ad.directive';
 import { AdService } from './chat_dynamic/ad.service';
 
+
 @NgModule({
   declarations: [
     BigDataComponent,
     CdkVirtualScrollDataSourceExample,
     ChatComponent,
-    AdDirective
+    AdDirective,
   ],
   imports: [
     CommonModule,
