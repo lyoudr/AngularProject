@@ -15,38 +15,18 @@ var socket = new WebSocketServer({
   httpServer: server,
   autoAcceptConnections: false
 });
-var connections = [];
+let connectionlists = [];
 socket.on('request', function(request) {
   var connection = request.accept('echo-protocol', request.origin);
-  let prevname;
+  connectionlists.push(connection);
   //On message
   connection.on('message', function(message) {
-    let receivedMessage = JSON.parse(message.utf8Data);
-    console.log('receivedMessage is =>', receivedMessage)
-    let namelist = [];
-    if(receivedMessage.name != prevname){
-      connections.push(connection);
-      console.log('client origin is =>', connections);
-      console.log('connections.length is =>',connections.length);
-      namelist.push(receivedMessage.name);
-      prevname = receivedMessage.name;
-    } else {
-      return;
-    }
     if (message.type === 'utf8') {
-        console.log('Received Message: ' + message.utf8Data);
-        for(var i = 0; i < connections.length; i++) {
-          if (i == namelist.indexOf[`${receivedMessage.name}`]) {
-            continue;
-          } else {
-            connections[i].sendUTF(receivedMessage.message);
-          }
-          
-        }
-    }
-    else if (message.type === 'binary') {
-        console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
-        connection.sendBytes(message.binaryData);
+      connectionlists.forEach((connection) => {
+        connection.sendUTF(message.utf8Data); 
+      });
+    } else if (message.type === 'binary') {
+      connection.sendBytes(message.binaryData);
     }
   });
   

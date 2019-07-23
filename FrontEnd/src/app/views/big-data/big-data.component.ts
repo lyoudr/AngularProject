@@ -43,7 +43,8 @@ export class BigDataComponent implements OnInit {
     // Listen for messages
     this.socket.onmessage = (event) => {
       console.log('Received data from server is =>', event.data);
-      this.TextAreaMessage.push({"Name": name, "Message": event.data});
+      let receivedMsg = JSON.parse(event.data);
+      this.TextAreaMessage.push({"Name": receivedMsg.name, "Message": receivedMsg.message});
     }
   }
 }
