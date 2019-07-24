@@ -1,10 +1,12 @@
 <!--Chat Area-->
-<div class="container border-bottom chat">
+<div class="container border bg-light mb-5 chat">
+    <div class="row justify-content-center">
+        <h5 class="ml-5 mb-4 mt-5">Chat Room </h5>
+    </div>
     <div class="row justify-content-center mt-5">
-        <h5 class="ml-5 mb-4">Chat Room </h5>
         <div [style]= "chatstyle" class="col-12 col-md-8">
-            <div [style.margin-left]="self ? '150px' : '0px' " *ngFor= "let eachMessage of TextAreaMessage">
-            {{eachMessage.Name}}: {{eachMessage.Message}}
+            <div class="mt-3" [style.margin-left]="self ? '150px' : '0px' " *ngFor= "let eachMessage of TextAreaMessage">
+                {{eachMessage.Name}}: {{eachMessage.Message}}
             </div>
         </div>
     </div>
@@ -22,8 +24,10 @@
                 </div>
                 <input type="text" class="form-control" #Chat/>
             </div>
-            <button type="button" class="btn btn-dark mt-3 ml-5" (click)="ConnectWebSocket(Chat.value, Name.value)" id="btn">Send</button>
-            <button type="button" class="btn btn-dark mt-3 ml-5" (click)="close()">X</button>
+            <div class="row justify-content-center mb-5">
+                <button type="button" class="btn btn-dark mt-3" (click)="ConnectWebSocket(Chat.value, Name.value)" id="btn">Send</button>
+                <button type="button" class="btn btn-dark mt-3 ml-2" (click)="close()">X</button>
+            </div>
         </div>
     </div>
 </div>

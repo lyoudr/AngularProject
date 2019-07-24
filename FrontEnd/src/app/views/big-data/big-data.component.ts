@@ -58,6 +58,7 @@ export class BigDataComponent implements OnInit {
           console.log('event.target is =>', event.target);
           console.log('document.querySelector(".chat") is =>', document.querySelector('.chat'));
           if(!document.querySelector('.chat').contains(<HTMLElement>event.target)){
+            console.log('not containe');
             event.preventDefault();
           }
         });
