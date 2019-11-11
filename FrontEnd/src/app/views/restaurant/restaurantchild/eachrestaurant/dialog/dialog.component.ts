@@ -13,7 +13,7 @@ export interface DialogData {
 })
 export class DialogComponent implements OnInit {
 
-  @ViewChild('file') file;
+  @ViewChild('file', {read: true}) file;
 
   public files: Set<File> = new Set();
 
